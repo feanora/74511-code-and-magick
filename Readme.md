@@ -1,7 +1,7 @@
 # Учебный проект «Код и Магия» [![Build status][travis-image]][travis-url]
 
 * Студент: [Юлия Акутина](https://up.htmlacademy.ru/javascript/14/user/74511).
-* Наставник: `Неизвестно`.
+* Наставник: [Виталий Усик](https://htmlacademy.ru/profile/id235226).
 
 ---
 
