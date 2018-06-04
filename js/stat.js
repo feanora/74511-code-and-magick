@@ -46,9 +46,9 @@ var renderStatHeader = function (ctx, textColor) {
   ctx.fillText('Список результатов:', CLOUD_X + headerIndentX, CLOUD_Y + CLOUD_SHIFT_Y + FONT_GAP + GAP);
 };
 
-// Получение случайного альфа-канала
-var getAlphaCompositing = function () {
-  return Math.ceil(Math.random() * 10) / 10;
+// Получение случайного значения насыщенности
+var getSaturation = function () {
+  return Math.round(Math.random() * 100);
 };
 
 // Поиск максимального элемента массива
@@ -75,7 +75,7 @@ var renderBarChart = function (ctx, names, times, textColor, myBarColor) {
     if (names[i] === 'Вы') {
       ctx.fillStyle = myBarColor;
     } else {
-      ctx.fillStyle = 'rgba(0, 0, 255, ' + getAlphaCompositing() + ')';
+      ctx.fillStyle = 'hsl(240, ' + getSaturation() + '%, 50%)';
     }
     var barHeight = (Math.round(times[i]) * BAR_HEIGHT) / maxTime;
     ctx.fillRect(CLOUD_X + barIndentX + (BAR_WIDTH + BAR_GAP) * i, (headerHeight + GAP * 2) + (BAR_HEIGHT - barHeight), BAR_WIDTH, barHeight);
