@@ -3,7 +3,7 @@
 var userDialog = document.querySelector('.setup');
 userDialog.classList.remove('hidden');
 
-var allWizardNames = [
+var ALL_WIZARD_NAMES = [
   'Иван',
   'Хуан Себастьян',
   'Мария',
@@ -14,7 +14,7 @@ var allWizardNames = [
   'Вашингтон'
 ];
 
-var allWizardSurnames = [
+var ALL_WIZARD_SURNAMES = [
   'да Марья',
   'Верон',
   'Мирабелла',
@@ -25,7 +25,7 @@ var allWizardSurnames = [
   'Ирвинг'
 ];
 
-var allCoatColors = [
+var ALL_COAT_COLORS = [
   'rgb(241, 43, 107)',
   'rgb(101, 137, 164)',
   'rgb(146, 100, 161)',
@@ -34,7 +34,7 @@ var allCoatColors = [
   'rgb(0, 0, 0)'
 ];
 
-var allEyesColors = [
+var ALL_EYES_COLORS = [
   'black',
   'red',
   'blue',
@@ -42,12 +42,22 @@ var allEyesColors = [
   'green'
 ];
 
+var NUMBER_OF_WIZARD = 4;
+var wizards = [];
+var similarListElement = document.querySelector('.setup-similar-list');
+var similarWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
+
+// Генерация случайного числа от 0 до max
+var getRandomNumber = function (max) {
+  return Math.round(Math.random() * max);
+};
+
 // Генерация объекта волшебника со случайными значениями свойств
 var createWizard = function (names, surnames, coat, eyes) {
-  var randomWizardName = names[Math.round(Math.random() * (names.length - 1))] + ' ' + surnames[Math.round(Math.random() * (surnames.length - 1))];
-  var randomCoatColor = coat[Math.round(Math.random() * (coat.length - 1))];
-  var randomEyesColor = eyes[Math.round(Math.random() * (eyes.length - 1))];
   var randomWizard = {};
+  var randomWizardName = names[getRandomNumber(names.length - 1)] + ' ' + surnames[getRandomNumber(surnames.length - 1)];
+  var randomCoatColor = coat[getRandomNumber(coat.length - 1)];
+  var randomEyesColor = eyes[getRandomNumber(eyes.length - 1)];
   randomWizard.name = randomWizardName;
   randomWizard.coatColor = randomCoatColor;
   randomWizard.eyesColor = randomEyesColor;
@@ -55,20 +65,13 @@ var createWizard = function (names, surnames, coat, eyes) {
 };
 
 // Создание массива с объектами волшебников
-var numberOfWizard = 4;
-
-var createWizards = function () {
-  var wizards = [];
-  for (var i = 0; i < numberOfWizard; i++) {
-    wizards[i] = createWizard(allWizardNames, allWizardSurnames, allCoatColors, allEyesColors);
+var initWizards = function () {
+  // var wizards = [];
+  for (var i = 0; i < NUMBER_OF_WIZARD; i++) {
+    wizards[i] = createWizard(ALL_WIZARD_NAMES, ALL_WIZARD_SURNAMES, ALL_COAT_COLORS, ALL_EYES_COLORS);
   }
   return wizards;
 };
-
-var wizards = createWizards();
-
-var similarListElement = document.querySelector('.setup-similar-list');
-var similarWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
 
 // Создание DOM-элемента на основе объекта волшебника
 var renderWizard = function (wizard) {
@@ -88,5 +91,16 @@ var fillBlock = function () {
   }
 };
 
-fillBlock();
-document.querySelector('.setup-similar').classList.remove('hidden');
+// Отображение блока с похожими волшебниками
+var showSimilarSetup = function () {
+  document.querySelector('.setup-similar').classList.remove('hidden');
+};
+
+// Точка входа в программу
+var init = function () {
+  initWizards();
+  fillBlock();
+  showSimilarSetup();
+};
+
+init();
