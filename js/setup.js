@@ -1,8 +1,5 @@
 'use strict';
 
-var userDialog = document.querySelector('.setup');
-userDialog.classList.remove('hidden');
-
 var ALL_WIZARD_NAMES = [
   'Иван',
   'Хуан Себастьян',
@@ -43,6 +40,8 @@ var ALL_EYES_COLORS = [
 ];
 
 var NUMBER_OF_WIZARD = 4;
+var userDialog = document.querySelector('.setup');
+userDialog.classList.remove('hidden');
 var wizards = [];
 var similarListElement = document.querySelector('.setup-similar-list');
 var similarWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
@@ -66,11 +65,11 @@ var createWizard = function (names, surnames, coat, eyes) {
 
 // Создание массива с объектами волшебников
 var initWizards = function () {
-  // var wizards = [];
+  var newWizards = [];
   for (var i = 0; i < NUMBER_OF_WIZARD; i++) {
-    wizards[i] = createWizard(ALL_WIZARD_NAMES, ALL_WIZARD_SURNAMES, ALL_COAT_COLORS, ALL_EYES_COLORS);
+    newWizards[i] = createWizard(ALL_WIZARD_NAMES, ALL_WIZARD_SURNAMES, ALL_COAT_COLORS, ALL_EYES_COLORS);
   }
-  return wizards;
+  return newWizards;
 };
 
 // Создание DOM-элемента на основе объекта волшебника
@@ -98,7 +97,7 @@ var showSimilarSetup = function () {
 
 // Точка входа в программу
 var init = function () {
-  initWizards();
+  wizards = initWizards();
   fillBlock();
   showSimilarSetup();
 };
