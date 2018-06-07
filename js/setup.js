@@ -56,12 +56,37 @@ var createWizard = function (names, surnames, coat, eyes) {
 
 // Создание массива с объектами волшебников
 var numberOfWizard = 4;
-var wizards = [];
+
 var createWizards = function () {
+  var wizards = [];
   for (var i = 0; i < numberOfWizard; i++) {
     wizards[i] = createWizard(allWizardNames, allWizardSurnames, allCoatColors, allEyesColors);
   }
   return wizards;
 };
 
-createWizards();
+var wizards = createWizards();
+
+var similarListElement = document.querySelector('.setup-similar-list');
+var similarWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
+
+// Создание DOM-элемента на основе объекта волшебника
+var renderWizard = function (wizard) {
+  var wizardElement = similarWizardTemplate.cloneNode(true);
+  wizardElement.querySelector('.setup-similar-label').textContent = wizard.name;
+  wizardElement.querySelector('.wizard-coat').style.fill = wizard.coatColor;
+  wizardElement.querySelector('.wizard-eyes').style.fill = wizard.eyesColor;
+  return wizardElement;
+};
+
+// Заполнение блока DOM-элементами на основе массива с объектами
+var fillBlock = function () {
+  var fragment = document.createDocumentFragment();
+  for (var i = 0; i < wizards.length; i++) {
+    fragment.appendChild(renderWizard(wizards[i]));
+    similarListElement.appendChild(fragment);
+  }
+};
+
+fillBlock();
+document.querySelector('.setup-similar').classList.remove('hidden');
