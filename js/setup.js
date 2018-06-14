@@ -48,6 +48,7 @@ var similarListElement = document.querySelector('.setup-similar-list');
 var similarWizardTemplateElement = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
 var popupOpenElement = document.querySelector('.setup-open');
 var popupCloseElement = userDialogElement.querySelector('.setup-close');
+var userNameInputElement = userDialogElement.querySelector('.setup-user-name');
 
 // Генерация случайного числа от 0 до max
 var getRandomNumber = function (max) {
@@ -142,5 +143,17 @@ popupCloseElement.addEventListener('click', function () {
 popupCloseElement.addEventListener('keydown', function (evt) {
   if (evt.keyCode === ENTER_KEYCODE) {
     closePopup();
+  }
+});
+
+userNameInputElement.addEventListener('invalid', function () {
+  if (userNameInputElement.validity.tooShort) {
+    userNameInputElement.setCustomValidity('Придумайте имя подлиннее! Хотя бы 2 символа :-)');
+  } else if (userNameInputElement.validity.tooLong) {
+    userNameInputElement.setCustomValidity('Это будет сложно произнести!');
+  } else if (userNameInputElement.validity.valueMissing) {
+    userNameInputElement.setCustomValidity('Ну надо же его как-то называть!');
+  } else {
+    userNameInputElement.setCustomValidity('');
   }
 });
