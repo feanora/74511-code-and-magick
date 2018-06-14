@@ -177,7 +177,7 @@ userNameInputElement.addEventListener('invalid', function () {
   }
 });
 
-document.addEventListener('keydown', function (evt) {
+userNameInputElement.addEventListener('keydown', function (evt) {
   if (evt.keyCode === ENTER_KEYCODE) {
     evt.preventDefault();
   }
