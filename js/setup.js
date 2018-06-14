@@ -40,11 +40,14 @@ var ALL_EYES_COLORS = [
 ];
 
 var NUMBER_OF_WIZARD = 4;
-var userDialog = document.querySelector('.setup');
-userDialog.classList.remove('hidden');
+var ESC_KEYCODE = 27;
+var ENTER_KEYCODE = 13;
+var userDialogElement = document.querySelector('.setup');
 var wizards = [];
 var similarListElement = document.querySelector('.setup-similar-list');
-var similarWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
+var similarWizardTemplateElement = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
+var popupOpenElement = document.querySelector('.setup-open');
+var popupCloseElement = userDialogElement.querySelector('.setup-close');
 
 // Генерация случайного числа от 0 до max
 var getRandomNumber = function (max) {
@@ -74,7 +77,7 @@ var initWizards = function () {
 
 // Создание DOM-элемента на основе объекта волшебника
 var renderWizard = function (wizard) {
-  var wizardElement = similarWizardTemplate.cloneNode(true);
+  var wizardElement = similarWizardTemplateElement.cloneNode(true);
   wizardElement.querySelector('.setup-similar-label').textContent = wizard.name;
   wizardElement.querySelector('.wizard-coat').style.fill = wizard.coatColor;
   wizardElement.querySelector('.wizard-eyes').style.fill = wizard.eyesColor;
@@ -103,3 +106,41 @@ var init = function () {
 };
 
 init();
+
+var popupEscPressHandler = function (evt) {
+  if (evt.keyCode === ESC_KEYCODE) {
+    closePopup();
+  }
+};
+
+// Открытие окна настройки персонажа
+var openPopup = function () {
+  userDialogElement.classList.remove('hidden');
+  document.addEventListener('keydown', popupEscPressHandler);
+};
+
+// Закрытие окна настройки персонажа
+var closePopup = function () {
+  userDialogElement.classList.add('hidden');
+  document.removeEventListener('keydown', popupEscPressHandler);
+};
+
+popupOpenElement.addEventListener('click', function () {
+  openPopup();
+});
+
+popupOpenElement.addEventListener('keydown', function (evt) {
+  if (evt.keyCode === ENTER_KEYCODE) {
+    openPopup();
+  }
+});
+
+popupCloseElement.addEventListener('click', function () {
+  closePopup();
+});
+
+popupCloseElement.addEventListener('keydown', function (evt) {
+  if (evt.keyCode === ENTER_KEYCODE) {
+    closePopup();
+  }
+});
