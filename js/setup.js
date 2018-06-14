@@ -124,8 +124,12 @@ var init = function () {
 init();
 
 var popupEscPressHandler = function (evt) {
-  if (evt.keyCode === ESC_KEYCODE) {
-    closePopup();
+  if (userNameInputElement === document.activeElement) {
+    evt.stopPropagation();
+  } else {
+    if (evt.keyCode === ESC_KEYCODE) {
+      closePopup();
+    }
   }
 };
 
@@ -170,6 +174,12 @@ userNameInputElement.addEventListener('invalid', function () {
     userNameInputElement.setCustomValidity('Ну надо же его как-то называть!');
   } else {
     userNameInputElement.setCustomValidity('');
+  }
+});
+
+document.addEventListener('keydown', function (evt) {
+  if (evt.keyCode === ENTER_KEYCODE) {
+    evt.preventDefault();
   }
 });
 
