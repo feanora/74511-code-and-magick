@@ -39,6 +39,14 @@ var ALL_EYES_COLORS = [
   'green'
 ];
 
+var ALL_FIREBALL_COLORS = [
+  '#ee4830',
+  '#30a8ee',
+  '#5ce6c0',
+  '#e848d5',
+  '#e6e848'
+];
+
 var NUMBER_OF_WIZARD = 4;
 var ESC_KEYCODE = 27;
 var ENTER_KEYCODE = 13;
@@ -49,6 +57,13 @@ var similarWizardTemplateElement = document.querySelector('#similar-wizard-templ
 var popupOpenElement = document.querySelector('.setup-open');
 var popupCloseElement = userDialogElement.querySelector('.setup-close');
 var userNameInputElement = userDialogElement.querySelector('.setup-user-name');
+var playerWizardElement = userDialogElement.querySelector('.setup-wizard');
+var playerWizardCoatElement = playerWizardElement.querySelector('.wizard-coat');
+var playerWizardEyesElement = playerWizardElement.querySelector('.wizard-eyes');
+var playerWizardFireballElement = userDialogElement.querySelector('.setup-fireball-wrap');
+var coatColorElement = userDialogElement.querySelector('input[name="coat-color"]');
+var eyesColorElement = userDialogElement.querySelector('input[name="eyes-color"]');
+var fireballColorElement = userDialogElement.querySelector('input[name="fireball-color"]');
 
 // Генерация случайного числа от 0 до max
 var getRandomNumber = function (max) {
@@ -156,4 +171,31 @@ userNameInputElement.addEventListener('invalid', function () {
   } else {
     userNameInputElement.setCustomValidity('');
   }
+});
+
+// Изменение цвета элементов персонажа
+var changeSettings = function (wizardPart, colorsList, inputHidden) {
+  var currentNumber = colorsList.indexOf(inputHidden.value);
+  if (currentNumber === colorsList.length - 1) {
+    currentNumber = -1;
+  }
+  ++currentNumber;
+  if (wizardPart.tagName === 'use') {
+    wizardPart.style.fill = colorsList[currentNumber];
+  } else {
+    wizardPart.style.backgroundColor = colorsList[currentNumber];
+  }
+  inputHidden.value = colorsList[currentNumber];
+};
+
+playerWizardCoatElement.addEventListener('click', function () {
+  changeSettings(playerWizardCoatElement, ALL_COAT_COLORS, coatColorElement);
+});
+
+playerWizardEyesElement.addEventListener('click', function () {
+  changeSettings(playerWizardEyesElement, ALL_EYES_COLORS, eyesColorElement);
+});
+
+playerWizardFireballElement.addEventListener('click', function () {
+  changeSettings(playerWizardFireballElement, ALL_FIREBALL_COLORS, fireballColorElement);
 });
