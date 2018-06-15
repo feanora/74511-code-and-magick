@@ -126,10 +126,8 @@ init();
 var popupEscPressHandler = function (evt) {
   if (userNameInputElement === document.activeElement) {
     evt.stopPropagation();
-  } else {
-    if (evt.keyCode === ESC_KEYCODE) {
-      closePopup();
-    }
+  } else if (evt.keyCode === ESC_KEYCODE) {
+    closePopup();
   }
 };
 
