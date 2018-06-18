@@ -140,6 +140,8 @@ var openPopup = function () {
 // Закрытие окна настройки персонажа
 var closePopup = function () {
   userDialogElement.classList.add('hidden');
+  userDialogElement.style.left = '50%';
+  userDialogElement.style.top = '80px';
   document.removeEventListener('keydown', popupEscPressHandler);
 };
 
