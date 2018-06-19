@@ -1,7 +1,6 @@
 'use strict';
 (function () {
-  var userDialogElement = document.querySelector('.setup');
-  var dialogHandlerElement = userDialogElement.querySelector('.upload');
+  var dialogHandlerElement = window.elements.userDialogElement.querySelector('.upload');
 
   dialogHandlerElement.addEventListener('mousedown', function (evt) {
     evt.preventDefault();
@@ -21,8 +20,8 @@
         x: moveEvt.clientX,
         y: moveEvt.clientY
       };
-      userDialogElement.style.top = (userDialogElement.offsetTop - shift.y) + 'px';
-      userDialogElement.style.left = (userDialogElement.offsetLeft - shift.x) + 'px';
+      window.elements.userDialogElement.style.top = (window.elements.userDialogElement.offsetTop - shift.y) + 'px';
+      window.elements.userDialogElement.style.left = (window.elements.userDialogElement.offsetLeft - shift.x) + 'px';
     };
 
     var mouseUpHandler = function (upEvt) {
