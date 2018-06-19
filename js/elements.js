@@ -1,9 +1,9 @@
 'use strict';
 
-window.elements = (function () {
+(function () {
   var userDialogElement = document.querySelector('.setup');
   var userNameInputElement = userDialogElement.querySelector('.setup-user-name');
-  return {
+  window.elements = {
     userDialogElement: userDialogElement,
     userNameInputElement: userNameInputElement
   };

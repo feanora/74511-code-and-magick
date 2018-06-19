@@ -7,7 +7,7 @@
     if (window.elements.userNameInputElement === document.activeElement) {
       evt.stopPropagation();
     } else {
-      window.util.isEscEvent(evt, closePopup);
+      window.util.performActionIfEscEvent(evt, closePopup);
     }
   };
 
@@ -30,7 +30,7 @@
   });
 
   popupOpenElement.addEventListener('keydown', function (evt) {
-    window.util.isEnterEvent(evt, openPopup);
+    window.util.performActionIfEnterEvent(evt, openPopup);
   });
 
   popupCloseElement.addEventListener('click', function () {
@@ -38,6 +38,6 @@
   });
 
   popupCloseElement.addEventListener('keydown', function (evt) {
-    window.util.isEnterEvent(evt, closePopup);
+    window.util.performActionIfEnterEvent(evt, closePopup);
   });
 })();

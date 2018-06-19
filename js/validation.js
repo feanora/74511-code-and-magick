@@ -1,20 +1,21 @@
 'use strict';
 
 (function () {
-  window.elements.userNameInputElement.addEventListener('invalid', function () {
-    if (window.elements.userNameInputElement.validity.tooShort) {
-      window.elements.userNameInputElement.setCustomValidity('Придумайте имя подлиннее! Хотя бы 2 символа :-)');
-    } else if (window.elements.userNameInputElement.validity.tooLong) {
-      window.elements.userNameInputElement.setCustomValidity('Это будет сложно произнести!');
-    } else if (window.elements.userNameInputElement.validity.valueMissing) {
-      window.elements.userNameInputElement.setCustomValidity('Ну надо же его как-то называть!');
+  var inputElement = window.elements.userNameInputElement;
+  inputElement.addEventListener('invalid', function () {
+    if (inputElement.validity.tooShort) {
+      inputElement.setCustomValidity('Придумайте имя подлиннее! Хотя бы 2 символа :-)');
+    } else if (inputElement.validity.tooLong) {
+      inputElement.setCustomValidity('Это будет сложно произнести!');
+    } else if (inputElement.validity.valueMissing) {
+      inputElement.setCustomValidity('Ну надо же его как-то называть!');
     } else {
-      window.elements.userNameInputElement.setCustomValidity('');
+      inputElement.setCustomValidity('');
     }
   });
 
-  window.elements.userNameInputElement.addEventListener('keydown', function (evt) {
-    window.util.isEnterEvent(evt, function () {
+  inputElement.addEventListener('keydown', function (evt) {
+    window.util.performActionIfEnterEvent(evt, function () {
       evt.preventDefault();
     });
   });

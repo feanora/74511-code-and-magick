@@ -1,6 +1,6 @@
 'use strict';
 
-window.util = (function () {
+(function () {
   var ESC_KEYCODE = 27;
   var ENTER_KEYCODE = 13;
   var ALL_COAT_COLORS = [
@@ -28,16 +28,16 @@ window.util = (function () {
     '#e6e848'
   ];
 
-  return {
+  window.util = {
     ALL_COAT_COLORS: ALL_COAT_COLORS,
     ALL_EYES_COLORS: ALL_EYES_COLORS,
     ALL_FIREBALL_COLORS: ALL_FIREBALL_COLORS,
-    isEscEvent: function (evt, action) {
+    performActionIfEscEvent: function (evt, action) {
       if (evt.keyCode === ESC_KEYCODE) {
         action();
       }
     },
-    isEnterEvent: function (evt, action) {
+    performActionIfEnterEvent: function (evt, action) {
       if (evt.keyCode === ENTER_KEYCODE) {
         action();
       }
