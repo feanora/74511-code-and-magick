@@ -1,6 +1,6 @@
 'use strict';
 
-window.renderStatistics = (function () {
+(function () {
   var CLOUD_WIDTH = 420;
   var CLOUD_HEIGHT = 270;
   var CLOUD_X = 100;
@@ -70,12 +70,10 @@ window.renderStatistics = (function () {
   };
 
   // Отрисовка статистики
-  return {
-    init: function (ctx, names, times) {
-      renderCloud(ctx, CLOUD_X + GAP, CLOUD_Y + GAP, 'rgba(0, 0, 0, 0.7)');
-      renderCloud(ctx, CLOUD_X, CLOUD_Y, '#fff');
-      renderStatHeader(ctx, '#000');
-      renderBarChart(ctx, names, times, '#000', 'rgba(255, 0, 0, 1)');
-    }
+  window.renderStatistics = function (ctx, names, times) {
+    renderCloud(ctx, CLOUD_X + GAP, CLOUD_Y + GAP, 'rgba(0, 0, 0, 0.7)');
+    renderCloud(ctx, CLOUD_X, CLOUD_Y, '#fff');
+    renderStatHeader(ctx, '#000');
+    renderBarChart(ctx, names, times, '#000', 'rgba(255, 0, 0, 1)');
   };
 })();
