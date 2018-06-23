@@ -40,4 +40,8 @@
   popupCloseElement.addEventListener('keydown', function (evt) {
     window.util.performActionIfEnterEvent(evt, closePopup);
   });
+
+  window.dialogOpen = {
+    closePopup: closePopup
+  };
 })();
