@@ -1,22 +1,28 @@
 'use strict';
 
 (function () {
+  var ERROR_CODES = {
+    OK: 200,
+    BAD_REQUES: 400,
+    UNAUTHORIZED: 401,
+    NOT_FOUND: 404
+  };
   var preparedXhr = function (onLoad, onError) {
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
 
     xhr.addEventListener('load', function () {
       switch (xhr.status) {
-        case 200:
+        case ERROR_CODES.OK:
           onLoad(xhr.response);
           break;
-        case 400:
+        case ERROR_CODES.BAD_REQUES:
           onError('Неверный запрос');
           break;
-        case 401:
+        case ERROR_CODES.UNAUTHORIZED:
           onError('Пользователь не авторизован');
           break;
-        case 404:
+        case ERROR_CODES.NOT_FOUND:
           onError('Ничего не найдено');
           break;
 
