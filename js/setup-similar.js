@@ -1,27 +1,67 @@
 'use strict';
 
 (function () {
-  var NUMBER_OF_WIZARD = 4;
-  var similarListElement = document.querySelector('.setup-similar-list');
-  var similarWizardTemplateElement = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
+  var coatColor;
+  var eyesColor;
+  var fireballColor;
+  var wizards = [];
 
-  // Создание DOM-элемента на основе объекта волшебника
-  var renderWizard = function (wizard) {
-    var wizardElement = similarWizardTemplateElement.cloneNode(true);
-    wizardElement.querySelector('.setup-similar-label').textContent = wizard.name;
-    wizardElement.querySelector('.wizard-coat').style.fill = wizard.colorCoat;
-    wizardElement.querySelector('.wizard-eyes').style.fill = wizard.colorEyes;
-    return wizardElement;
+  // Расчет ранга похожести волшебника
+  var getRank = function (wizard) {
+    var rank = 0;
+    if (wizard.colorCoat === coatColor) {
+      rank += 2;
+    }
+    if (wizard.colorEyes === eyesColor) {
+      rank += 1;
+    }
+    if (wizard.colorFireball === fireballColor) {
+      rank += 1;
+    }
+    return rank;
   };
 
-  // Обработчик успешной загрузки
-  var loadHandler = function (wizards) {
-    var fragment = document.createDocumentFragment();
-    wizards = window.util.shuffleArray(wizards);
-    for (var i = 0; i < NUMBER_OF_WIZARD; i++) {
-      fragment.appendChild(renderWizard(wizards[i]));
-      similarListElement.appendChild(fragment);
+  // Сортировка имен в алфавитном порядке
+  var namesComparator = function (left, right) {
+    if (left > right) {
+      return 1;
+    } else if (left < right) {
+      return -1;
+    } else {
+      return 0;
     }
+  };
+
+  // Обновление похожих волшебников при изменении внешности волшебника пользователя
+  var updateWizards = function () {
+    window.renderWizards(wizards.sort(function (left, right) {
+      var rankDiff = getRank(right) - getRank(left);
+      if (rankDiff === 0) {
+        rankDiff = namesComparator(left.name, right.name);
+      }
+      return rankDiff;
+    }));
+  };
+
+  window.wizard.coatChangeHandler = window.debounce(function (color) {
+    coatColor = color;
+    updateWizards();
+  });
+
+  window.wizard.eyesChangeHandler = window.debounce(function (color) {
+    eyesColor = color;
+    updateWizards();
+  });
+
+  window.wizard.fireballChangeHandler = window.debounce(function (color) {
+    fireballColor = color;
+    updateWizards();
+  });
+
+  // Обработчик успешной загрузки
+  var loadHandler = function (data) {
+    wizards = data;
+    updateWizards();
   };
 
   // Обработчик ошибки
