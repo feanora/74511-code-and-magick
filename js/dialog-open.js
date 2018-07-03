@@ -1,27 +1,31 @@
 'use strict';
 
 (function () {
-  var popupOpenElement = document.querySelector('.setup-open');
-  var popupCloseElement = window.elements.userDialogElement.querySelector('.setup-close');
+  var elementsModule = window.elements;
+  var popupOpenElement = elementsModule.popupOpen;
+  var userDialogElement = elementsModule.userDialog;
+  var popupCloseElement = elementsModule.userDialog.querySelector('.setup-close');
+  var utilModule = window.util;
+
   var popupEscPressHandler = function (evt) {
-    if (window.elements.userNameInputElement === document.activeElement) {
+    if (elementsModule.userNameInput === document.activeElement) {
       evt.stopPropagation();
     } else {
-      window.util.performActionIfEscEvent(evt, closePopup);
+      utilModule.performActionIfEscEvent(evt, closePopup);
     }
   };
 
   // Открытие окна настройки персонажа
   var openPopup = function () {
-    window.elements.userDialogElement.classList.remove('hidden');
+    userDialogElement.classList.remove('hidden');
     document.addEventListener('keydown', popupEscPressHandler);
   };
 
   // Закрытие окна настройки персонажа
   var closePopup = function () {
-    window.elements.userDialogElement.classList.add('hidden');
-    window.elements.userDialogElement.style.left = '50%';
-    window.elements.userDialogElement.style.top = '80px';
+    userDialogElement.classList.add('hidden');
+    userDialogElement.style.left = '50%';
+    userDialogElement.style.top = '80px';
     document.removeEventListener('keydown', popupEscPressHandler);
   };
 
@@ -30,7 +34,7 @@
   });
 
   popupOpenElement.addEventListener('keydown', function (evt) {
-    window.util.performActionIfEnterEvent(evt, openPopup);
+    utilModule.performActionIfEnterEvent(evt, openPopup);
   });
 
   popupCloseElement.addEventListener('click', function () {
@@ -38,7 +42,7 @@
   });
 
   popupCloseElement.addEventListener('keydown', function (evt) {
-    window.util.performActionIfEnterEvent(evt, closePopup);
+    utilModule.performActionIfEnterEvent(evt, closePopup);
   });
 
   window.dialogOpen = {

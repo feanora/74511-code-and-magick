@@ -1,9 +1,10 @@
 'use strict';
 
 (function () {
-  var formElement = window.elements.userDialogElement.querySelector('.setup-wizard-form');
+  var elementsModule = window.elements;
+  var formElement = elementsModule.userDialog.querySelector('.setup-wizard-form');
+  var inputElement = elementsModule.userNameInput;
 
-  var inputElement = window.elements.userNameInputElement;
   inputElement.addEventListener('invalid', function () {
     if (inputElement.validity.tooShort) {
       inputElement.setCustomValidity('Придумайте имя подлиннее! Хотя бы 2 символа :-)');

@@ -3,8 +3,11 @@
 (function () {
   var userDialogElement = document.querySelector('.setup');
   var userNameInputElement = userDialogElement.querySelector('.setup-user-name');
+  var popupOpenElement = document.querySelector('.setup-open');
+
   window.elements = {
-    userDialogElement: userDialogElement,
-    userNameInputElement: userNameInputElement
+    userDialog: userDialogElement,
+    userNameInput: userNameInputElement,
+    popupOpen: popupOpenElement
   };
 })();
