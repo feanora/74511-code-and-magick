@@ -39,5 +39,5 @@
     wizard.fireballChangeHandler(fireballColorElement.value);
   });
 
-  window.setup = wizard;
+  window.wizard = wizard;
 })();
