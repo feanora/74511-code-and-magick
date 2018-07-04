@@ -15,6 +15,8 @@
   var BAR_HEIGHT = 150;
   var BAR_GAP = 50;
 
+  var utilModule = window.util;
+
   // Отрисовка облака
   var renderCloud = function (ctx, x, y, color) {
     var cloudPartX = CLOUD_WIDTH / 4;
@@ -50,7 +52,7 @@
   // Отрисовка диаграммы
   var renderBarChart = function (ctx, names, times, textColor, myBarColor) {
     var headerHeight = CLOUD_Y + CLOUD_SHIFT_Y + FONT_GAP + GAP + FONT_GAP;
-    var maxTime = Math.round(window.util.getMaxElement(times));
+    var maxTime = Math.round(utilModule.getMaxElement(times));
 
     for (var i = 0; i < names.length; i++) {
       ctx.fillStyle = textColor;
@@ -60,7 +62,7 @@
       if (names[i] === 'Вы') {
         ctx.fillStyle = myBarColor;
       } else {
-        ctx.fillStyle = 'hsl(240, ' + window.util.getRandomNumber(100) + '%, 50%)';
+        ctx.fillStyle = 'hsl(240, ' + utilModule.getRandomNumber(100) + '%, 50%)';
       }
       var barHeight = (Math.round(times[i]) * BAR_HEIGHT) / maxTime;
       ctx.fillRect(CLOUD_X + barIndentX + (BAR_WIDTH + BAR_GAP) * i, (headerHeight + GAP * 2) + (BAR_HEIGHT - barHeight), BAR_WIDTH, barHeight);

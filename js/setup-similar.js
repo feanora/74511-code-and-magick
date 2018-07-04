@@ -1,6 +1,8 @@
 'use strict';
 
 (function () {
+  var userWizard = window.wizard;
+  var debounceModule = window.debounce;
   var coatColor;
   var eyesColor;
   var fireballColor;
@@ -43,17 +45,17 @@
     }));
   };
 
-  window.wizard.coatChangeHandler = window.debounce(function (color) {
+  userWizard.coatChangeHandler = debounceModule(function (color) {
     coatColor = color;
     updateWizards();
   });
 
-  window.wizard.eyesChangeHandler = window.debounce(function (color) {
+  userWizard.eyesChangeHandler = debounceModule(function (color) {
     eyesColor = color;
     updateWizards();
   });
 
-  window.wizard.fireballChangeHandler = window.debounce(function (color) {
+  userWizard.fireballChangeHandler = debounceModule(function (color) {
     fireballColor = color;
     updateWizards();
   });

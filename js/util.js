@@ -28,46 +28,51 @@
     '#e6e848'
   ];
 
+  var performActionIfEscEvent = function (evt, action) {
+    if (evt.keyCode === ESC_KEYCODE) {
+      action();
+    }
+  };
+
+  var performActionIfEnterEvent = function (evt, action) {
+    if (evt.keyCode === ENTER_KEYCODE) {
+      action();
+    }
+  };
+
+  var getRandomNumber = function (max) {
+    return Math.round(Math.random() * max);
+  };
+
+  var getMaxElement = function (arr) {
+    var maxElement = arr[0];
+    for (var i = 1; i < arr.length; i++) {
+      if (arr[i] > maxElement) {
+        maxElement = arr[i];
+      }
+    }
+    return maxElement;
+  };
+
+  var shuffleArray = function (array) {
+    var newArray = array.slice();
+    for (var i = newArray.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var swap = newArray[i];
+      newArray[i] = newArray[j];
+      newArray[j] = swap;
+    }
+    return newArray;
+  };
+
   window.util = {
     ALL_COAT_COLORS: ALL_COAT_COLORS,
     ALL_EYES_COLORS: ALL_EYES_COLORS,
     ALL_FIREBALL_COLORS: ALL_FIREBALL_COLORS,
-
-    performActionIfEscEvent: function (evt, action) {
-      if (evt.keyCode === ESC_KEYCODE) {
-        action();
-      }
-    },
-
-    performActionIfEnterEvent: function (evt, action) {
-      if (evt.keyCode === ENTER_KEYCODE) {
-        action();
-      }
-    },
-
-    getRandomNumber: function (max) {
-      return Math.round(Math.random() * max);
-    },
-
-    getMaxElement: function (arr) {
-      var maxElement = arr[0];
-      for (var i = 1; i < arr.length; i++) {
-        if (arr[i] > maxElement) {
-          maxElement = arr[i];
-        }
-      }
-      return maxElement;
-    },
-
-    shuffleArray: function (array) {
-      var newArray = array.slice();
-      for (var i = newArray.length - 1; i > 0; i--) {
-        var j = Math.floor(Math.random() * (i + 1));
-        var swap = newArray[i];
-        newArray[i] = newArray[j];
-        newArray[j] = swap;
-      }
-      return newArray;
-    }
+    performActionIfEscEvent: performActionIfEscEvent,
+    performActionIfEnterEvent: performActionIfEnterEvent,
+    getRandomNumber: getRandomNumber,
+    getMaxElement: getMaxElement,
+    shuffleArray: shuffleArray
   };
 })();

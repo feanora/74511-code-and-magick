@@ -875,11 +875,47 @@ input[type=radio]:checked + .review-mark-label
 
 .setup-similar-item
 {
-    overflow: hidden;
+    position: relative;
 
     max-width: 150px;
 
     text-overflow: ellipsis;
+}
+
+.setup-similar-pupup
+{
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 30;
+
+  margin: 0;
+  padding: 10px;
+  width: 130px;
+
+  color: #000000;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: rgba(251, 216, 104, 0.8);
+}
+
+.setup-similar-artifacts-title
+{
+  margin: 0;
+  margin-bottom: 10px;
+  padding: 0;
+
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.setup-similar-inventory {
+  margin: 0;
+  padding: 0;
+
+  overflow: visible;
+  white-space: pre-wrap;
 }
 
 .setup-similar-label
@@ -994,6 +1030,11 @@ input[type=radio]:checked + .review-mark-label
     min-width: 40px;
     max-width: 40px;
     height: 40px;
+}
+
+.highlight
+{
+  box-shadow: 0 0 10px 6px #00f;
 }
 
 .upload .setup-user-pic
