@@ -1032,6 +1032,11 @@ input[type=radio]:checked + .review-mark-label
     height: 40px;
 }
 
+.highlight
+{
+  box-shadow: 0 0 10px 6px #00f;
+}
+
 .upload .setup-user-pic
 {
     position: absolute;
